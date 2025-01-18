@@ -1,10 +1,10 @@
 import React from 'react';
-import { Container, Divider } from '@mui/material';
+import { ButtonGroup, Container, Divider } from '@mui/material';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/system';
-import Status from './status';
-import VideoThumbnail from './video-thumbnail';
+import VideoContainer from './video-container';
+import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -21,33 +21,43 @@ const VisuallyHiddenInput = styled("input")({
 export default function UploadContainer() {
 
   const [videoFile, setVideoFile] = React.useState(null);
+  const [ready, setReady] = React.useState(false);
 
   const handleChange = (event) => {
     const files = event.target.files;
     setVideoFile(files[0]);
+    setReady(true);
+
   }
 
     return (
-      <Container sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 2 }}>
-        <VideoThumbnail inputVideoFile={videoFile}/>
-        <Button
-          component="label"
-          role={undefined}
-          variant="contained"
-          tabIndex={-1}
-          startIcon={<CloudUploadIcon />}
-        >
-          Upload files
-          <VisuallyHiddenInput
-            type="file"
-            onChange={handleChange}
-            multiple
-          />
-        </Button>
-        <Divider>
+      <Container sx={{ display: "flex", flexDirection: "column", width: "50%", gap: 2 }}>
+        <VideoContainer inputVideoFile={videoFile} />
+        <ButtonGroup variant="outlined" aria-label="outlined primary button group">
+          <Button
+            component="label"
+            role={undefined}
+            tabIndex={-1}
+            startIcon={<CloudUploadIcon />}
+            sx={{ width: "140px" }}
+          >
+            Select File
+            <VisuallyHiddenInput type="file" onChange={handleChange} multiple />
+          </Button>
+          <Button
+            component="label"
+            role={undefined}
+            tabIndex={-1}
+            startIcon={<TroubleshootIcon />}
+            sx={{ width: "140px" }}
+            disabled={!ready}
+            onClick={() => console.log("Summarising")}
+          >
+            Summarise
+          </Button>
+        </ButtonGroup>
 
-        </Divider>
-        <Status />
+        <Divider></Divider>
       </Container>
     );
 }

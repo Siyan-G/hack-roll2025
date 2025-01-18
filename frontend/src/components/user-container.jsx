@@ -10,13 +10,13 @@ export default function UserContainer() {
             <AppBar position="static">
                 <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                    Video Analysis Tool
+                    Video Summariser
                 </Typography>
                 </Toolbar>
             </AppBar>
-            <Container maxWidth={false} sx={{ bgcolor: "lightyellow", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", height: "100vh" , width: "full"}}>
+            <Container maxWidth={false} sx={{ bgcolor: "lightyellow", display: "flex", flexDirection: "row", height: "100vh" , width: "full"}}>
                 <UploadContainer />
-                <Divider />
+                <Divider orientation='vetical' variant='fullwidth'/>
                 <Result />
             </Container>
         </>
