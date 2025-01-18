@@ -70,7 +70,7 @@ export default function UploadContainer({ onApiReturn }) {
             sx={{ width: "150px" }}
           >
             Select File
-            <VisuallyHiddenInput type="file" onChange={handleChange} multiple />
+            <VisuallyHiddenInput type="file" accept="video/*" onChange={handleChange} multiple />
           </Button>
           <Button
             component="label"
