@@ -52,14 +52,14 @@ export default function UploadContainer() {
         <ButtonGroup
           variant="contained"
           aria-label="outlined primary button group"
-          sx={{ alignContent: "center", justifyContent: "center" }}
+          sx={{ alignContent: "center", justifyContent: "center", marginTop: "35px" }}
         >
           <Button
             component="label"
             role={undefined}
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
-            sx={{ width: "150px" }}
+            sx={{ width: "150px", height: "50px" }}
           >
             Select File
             <VisuallyHiddenInput type="file" onChange={handleChange} multiple />
