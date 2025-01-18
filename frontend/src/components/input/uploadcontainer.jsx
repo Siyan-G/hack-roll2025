@@ -20,10 +20,16 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-export default function UploadContainer() {
+
+
+export default function UploadContainer({ onApiReturn }) {
 
   const [videoFile, setVideoFile] = React.useState(null);
   const [ready, setReady] = React.useState(false);
+
+  const handleApiSuccess = () => {
+    onApiReturn();
+  };
 
   const handleChange = (event) => {
     const files = event.target.files;
@@ -59,7 +65,7 @@ export default function UploadContainer() {
             role={undefined}
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
-            sx={{ width: "150px", height: "50px" }}
+            sx={{ width: "150px" }}
           >
             Select File
             <VisuallyHiddenInput type="file" onChange={handleChange} multiple />
@@ -82,7 +88,7 @@ export default function UploadContainer() {
             startIcon={<TroubleshootIcon />}
             sx={{ width: "150px" }}
             disabled={!ready}
-            onClick={() => console.log("Summarising")}
+            onClick={handleApiSuccess}
           >
             Summarise
           </Button>

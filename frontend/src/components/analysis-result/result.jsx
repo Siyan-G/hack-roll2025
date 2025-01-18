@@ -23,8 +23,10 @@ const style = {
   p: 4,
 };
 
+const placeholder = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque accumsan nisi nunc. Quisque ut gravida odio, egestas convallis nunc. Etiam scelerisque in dolor eu lacinia. Curabitur odio dolor, lacinia a neque nec, condimentum cursus felis. Sed quis odio sit amet justo mollis rhoncus. Nam sit amet lorem vitae arcu tempus finibus. Integer vitae iaculis sem, et mollis augue. Nullam purus elit, aliquam in maximus eu, pulvinar quis diam. Integer eu mi vitae elit iaculis faucibus. Maecenas dapibus efficitur risus. Ut eget odio et nibh mollis accumsan id tincidunt ligula. Morbi facilisis nunc lacus, ac luctus justo consequat id.";
+
 export default function Result() {
-    const placeholder = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque accumsan nisi nunc. Quisque ut gravida odio, egestas convallis nunc. Etiam scelerisque in dolor eu lacinia. Curabitur odio dolor, lacinia a neque nec, condimentum cursus felis. Sed quis odio sit amet justo mollis rhoncus. Nam sit amet lorem vitae arcu tempus finibus. Integer vitae iaculis sem, et mollis augue. Nullam purus elit, aliquam in maximus eu, pulvinar quis diam. Integer eu mi vitae elit iaculis faucibus. Maecenas dapibus efficitur risus. Ut eget odio et nibh mollis accumsan id tincidunt ligula. Morbi facilisis nunc lacus, ac luctus justo consequat id. Maecenas fringilla.";
+    
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -48,7 +50,7 @@ export default function Result() {
           component="label"
           tabIndex={-1}
           startIcon={<TextSnippetIcon />}
-          sx={{ width: "200px", mb: "50px" }}
+          sx={{ width: "200px", height: "50px", mb: "50px" }}
           onClick={handleOpen}
         >
           View Summary

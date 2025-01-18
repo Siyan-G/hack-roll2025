@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { AppBar, Container, Divider, Toolbar, Typography } from "@mui/material";
 import Result from "./analysis-result/result";
 import UploadContainer from "./input/uploadcontainer";
 
 export default function UserContainer() {
-    return (    
+      const [apiReturned, setApiReturned] = useState(false);
+
+      const handleApiReturn = () => {
+        setApiReturned(true);
+      };
+
+      return (    
         <>
             <AppBar position="static">
                 <Toolbar>
@@ -14,9 +20,9 @@ export default function UserContainer() {
                 </Toolbar>
             </AppBar>
             <Container maxWidth={false} sx={{ bgcolor: "lightyellow", display: "flex", flexDirection: "row", height: "100vh" , width: "full"}}>
-                <UploadContainer />
+                <UploadContainer onApiReturn={handleApiReturn} />
                 <Divider />
-                <Result />
+                {apiReturned && <Result />}
             </Container>
         </>
     );
