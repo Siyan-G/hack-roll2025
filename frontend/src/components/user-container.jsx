@@ -10,14 +10,14 @@ export default function UserContainer() {
             <AppBar position="static">
                 <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                    Bruh
+                    Video Analysis Tool
                 </Typography>
                 </Toolbar>
             </AppBar>
-            <Container maxWidth={false} sx={{ bgcolor: "lightyellow", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center",}}>
+            <Container maxWidth={false} sx={{ bgcolor: "lightyellow", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", height: "100vh" , width: "full"}}>
                 <UploadContainer />
                 <Divider />
-                <Result sx={{overflow: "auto"}}/>
+                <Result />
             </Container>
         </>
     );
