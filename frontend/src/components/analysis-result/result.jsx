@@ -1,12 +1,44 @@
 import React from "react";
-import { Container, Typography } from "@mui/material";
+import {
+  Box,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+} from '@mui/material';
+
 
 export default function Result() {
     return (
-        <Container>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Result Container
+      <Box sx={{ width: '100%', maxWidth: 600, margin: '0 auto', p: 2 }}>
+        {/* Video Player */}
+        <Box
+          component="video"
+          controls
+          sx={{ width: '100%', borderRadius: 2, boxShadow: 3 }}
+        />
+
+        {/* Summary Section */}
+        <Box sx={{ my: 3, p: 2, bgcolor: 'background.paper', boxShadow: 1, borderRadius: 2 }}>
+          <Typography variant="h6">
+            Video Summary
           </Typography>
-        </Container>
+          <Typography variant="body1">{"Hello"}</Typography>
+        </Box>
+
+        {/* Timestamps List */}
+        <Box>
+          <Typography variant="h6">
+            Timestamps
+          </Typography>
+          <List>
+              <ListItem button>
+                <ListItemText primary={"00:00"} secondary={"Herro class"} />
+              </ListItem>
+              <Divider />
+          </List>
+        </Box>
+      </Box>
     );
 }
