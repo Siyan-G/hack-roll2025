@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Container, Divider, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Container, Divider, Toolbar, Typography } from "@mui/material";
 import Result from "./analysis-result/result";
 import UploadContainer from "./input/uploadcontainer";
 
@@ -10,14 +10,14 @@ export default function UserContainer() {
             <AppBar position="static">
                 <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                    Video Analysis Tool
+                    Bruh
                 </Typography>
                 </Toolbar>
             </AppBar>
-            <Container maxWidth={false} sx={{ bgcolor: "lightyellow", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", height: "100vh" , width: "full"}}>
+            <Container maxWidth={false} sx={{ bgcolor: "lightyellow", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center",}}>
                 <UploadContainer />
                 <Divider />
-                <Result />
+                <Result sx={{overflow: "auto"}}/>
             </Container>
         </>
     );
