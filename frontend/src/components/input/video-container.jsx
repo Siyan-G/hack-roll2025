@@ -7,16 +7,21 @@ export default function VideoContainer({ inputVideoFile }) {
 
   useEffect(() => {
     if (inputVideoFile) {
-      setVideoFile(URL.createObjectURL(inputVideoFile));
+      // setVideoFile(URL.createObjectURL(inputVideoFile));
+      const fileUrl = URL.createObjectURL(inputVideoFile)
+      setVideoFile({
+        file: inputVideoFile,
+        url: fileUrl
+      })
     }
   }, [inputVideoFile]);
 
 
   return (
     <>
-      {videoFile && (
+      {fileUrl && (
         <Card sx={{ width: "100%", borderRadius: 2, boxShadow: 3 }}>
-            <CardMedia component="video" controls src={videoFile} />
+            <CardMedia component="video" controls src={fileURL} />
         </Card>
       )}
     </>

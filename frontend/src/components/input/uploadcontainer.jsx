@@ -22,17 +22,19 @@ const VisuallyHiddenInput = styled("input")({
 
 
 
-export default function UploadContainer() {
+export default function UploadContainer( { handleApiReturn, setTranscription, setSummary, setLoading } ) {
 
   const { videoRef } = useContext(VideoContext);
   const [audioFile, setAudioFile] = React.useState(null);
   const [ready, setReady] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
-  const [transcription, setTranscription] = React.useState(null);
+  // const [transcription, setTranscription] = React.useState(null);
+  const [fileUrl, setFileURL] = React.useState(null)
+
+  //test for the showcase of analysis result
+
 
   const handleApiSuccess = async () => {
-
   if (!audioFile) {
       alert("Please select an audio file.");
       return;
@@ -67,6 +69,19 @@ export default function UploadContainer() {
 
       // Set the transcription result
       setTranscription(data.transcription);
+      setSummary(data.summary);
+
+      // // Test for delay
+      // const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+      // await delay(3000);
+      // setTranscription("test test test")
+      // setSummary("summary")
+
+
+      setLoading(false)
+      // setTranscription("test test test")
+
+      handleApiReturn();
     } catch (error) {
       console.error("Error:", error);
       setError(error.message);
@@ -77,7 +92,12 @@ export default function UploadContainer() {
 
   const handleChange = (event) => {
     const files = event.target.files;
-    setAudioFile(URL.createObjectURL(files[0]));
+    // setAudioFile(URL.createObjectURL(files[0]));
+    const file = files[0];
+    const fileURL = URL.createObjectURL(file);
+
+    setAudioFile(file);
+    setFileURL(fileURL);
     setReady(true);
 
   }
@@ -103,8 +123,9 @@ export default function UploadContainer() {
         </Typography>}
 
         {ready && <Card sx={{ borderRadius: 2, boxShadow: 3, alignContent: "center", justifyContent: "center", marginBottom: "8px" }}>
-          <CardMedia component="video" controls src={audioFile} ref={videoRef}/>
+          <CardMedia component="video" controls src={fileUrl} ref={videoRef}/>
         </Card>}
+        {/* <form onSubmit={handleApiSuccess}> */}
         <ButtonGroup
           variant="contained"
           aria-label="outlined primary button group"
@@ -139,10 +160,12 @@ export default function UploadContainer() {
             sx={{ width: "150px" }}
             disabled={!ready}
             onClick={handleApiSuccess}
+            // type = "submit"
           >
             Summarise
           </Button>
         </ButtonGroup>
+        {/* </form> */}
         <Divider></Divider>
       </Container>
     );

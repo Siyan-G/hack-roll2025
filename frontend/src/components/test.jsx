@@ -25,6 +25,7 @@ const AudioTranscription = () => {
     console.log("Audio File:", audioFile);
     const formData = new FormData();
     formData.append("audio", audioFile);
+    console.log(formData)
 
     try {
       setLoading(true);

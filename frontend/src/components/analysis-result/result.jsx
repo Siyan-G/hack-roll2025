@@ -26,11 +26,14 @@ const style = {
 
 const placeholder = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque accumsan nisi nunc. Quisque ut gravida odio, egestas convallis nunc. Etiam scelerisque in dolor eu lacinia. Curabitur odio dolor, lacinia a neque nec, condimentum cursus felis. Sed quis odio sit amet justo mollis rhoncus. Nam sit amet lorem vitae arcu tempus finibus. Integer vitae iaculis sem, et mollis augue. Nullam purus elit, aliquam in maximus eu, pulvinar quis diam. Integer eu mi vitae elit iaculis faucibus. Maecenas dapibus efficitur risus. Ut eget odio et nibh mollis accumsan id tincidunt ligula. Morbi facilisis nunc lacus, ac luctus justo consequat id.";
 
-export default function Result() {
+export default function Result({ transcription, summary }) {
     
     const [open, setOpen] = React.useState(false);
+    const [openSummary, setOpenSummary] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const handleOpenSummary = () => setOpenSummary(true);
+    const handleCloseSummary = () => setOpenSummary(false);
     const { seekToTimestamp } = useContext(VideoContext);
     const handleSetTimestamp = (x) => {
       seekToTimestamp(x); // Seek to 10 seconds
@@ -54,9 +57,9 @@ export default function Result() {
         alignItems: 'center'
       }}>
         
-        {/* Summary Section */}
+        {/* Transcript Section */}
         <Typography variant="h6" mb="10px">
-            Summary
+            Video Transcript
         </Typography>
         <Button
           variant="contained"
@@ -67,7 +70,7 @@ export default function Result() {
           sx={{ width: "200px", height: "50px", mb: "50px" }}
           onClick={handleOpen}
         >
-          View Summary
+          View Transcript
         </Button>
         <Modal
           open={open}
@@ -77,16 +80,48 @@ export default function Result() {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
+              Transcript
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              {transcription}
+            </Typography>
+          </Box>
+        </Modal>
+
+        {/* Summary Section */}
+        <Typography variant="h6" mb="10px">
+            Video Summary
+        </Typography>
+        <Button
+          variant="contained"
+          aria-label="outlined primary button group"
+          component="label"
+          tabIndex={-1}
+          startIcon={<TextSnippetIcon />}
+          sx={{ width: "200px", height: "50px", mb: "50px" }}
+          onClick={handleOpenSummary}
+        >
+          View Summary
+        </Button>
+
+        <Modal
+          open={openSummary}
+          onClose={handleCloseSummary}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
               Summary
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {placeholder}
+              {summary}
             </Typography>
           </Box>
         </Modal>
 
         {/* Timestamps List */}
-        <Box sx={{
+        {/* <Box sx={{
           width: '100%',
           maxWidth: 600,
           margin: '0 auto',
@@ -135,7 +170,8 @@ export default function Result() {
               </AccordionDetails>
             </Accordion>
           </div>
-        </Box>
+        </Box> */}
+
       </Box>
     );
 }
