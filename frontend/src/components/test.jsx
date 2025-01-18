@@ -22,7 +22,7 @@ const AudioTranscription = () => {
       alert("Please select an audio file.");
       return;
     }
-
+    console.log("Audio File:", audioFile);
     const formData = new FormData();
     formData.append("audio", audioFile);
 

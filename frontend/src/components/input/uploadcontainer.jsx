@@ -25,22 +25,65 @@ const VisuallyHiddenInput = styled("input")({
 export default function UploadContainer({ onApiReturn }) {
 
   const { videoRef } = useContext(VideoContext);
-  const [videoFile, setVideoFile] = React.useState(null);
+  const [audioFile, setAudioFile] = React.useState(null);
   const [ready, setReady] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
+  const [transcription, setTranscription] = React.useState(null);
 
-  const handleApiSuccess = () => {
-    onApiReturn();
+  const handleApiSuccess = async () => {
+
+  if (!audioFile) {
+      alert("Please select an audio file.");
+      return;
+    }
+    console.log("Audio File:", audioFile);
+    const formData = new FormData();
+    formData.append("audio", audioFile);
+
+    console.log("Form Data:", formData);
+
+    try {
+      setLoading(true);
+      setError(null);
+
+      // Send the audio file to the Flask API
+      const response = await fetch("http://localhost:5000/transcribe", {
+        method: "POST",
+        body: formData,
+      });
+
+      // Log the full response object for debugging
+      console.log("Response:", response);
+
+      if (!response.ok) {
+        throw new Error("Failed to transcribe audio.");
+      }
+
+      const data = await response.json();
+
+      // Log the response data for debugging
+      console.log("Transcription Data:", data);
+
+      // Set the transcription result
+      setTranscription(data.transcription);
+    } catch (error) {
+      console.error("Error:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (event) => {
     const files = event.target.files;
-    setVideoFile(URL.createObjectURL(files[0]));
+    setAudioFile(URL.createObjectURL(files[0]));
     setReady(true);
 
   }
 
   const handleDelete = () => {
-    setVideoFile(null);
+    setAudioFile(null);
     setReady(false);
   }
 
@@ -56,11 +99,11 @@ export default function UploadContainer({ onApiReturn }) {
       >
 
         {!ready && <Typography variant="h6" mt= "10px" mb="5px">
-            Upload your video file here!
+            Upload your audio file here!
         </Typography>}
 
         {ready && <Card sx={{ borderRadius: 2, boxShadow: 3, alignContent: "center", justifyContent: "center", marginBottom: "8px" }}>
-          <CardMedia component="video" controls src={videoFile} ref={videoRef}/>
+          <CardMedia component="video" controls src={audioFile} ref={videoRef}/>
         </Card>}
         <ButtonGroup
           variant="contained"
@@ -75,7 +118,7 @@ export default function UploadContainer({ onApiReturn }) {
             sx={{ width: "150px" }}
           >
             Select File
-            <VisuallyHiddenInput type="file" accept="video/*" onChange={handleChange} multiple />
+            <VisuallyHiddenInput type="file" accept="audio/*" onChange={handleChange} multiple />
           </Button>
           <Button
             component="label"
