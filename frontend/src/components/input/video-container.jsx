@@ -14,11 +14,11 @@ export default function VideoContainer({ inputVideoFile }) {
 
   return (
     <>
-      {videoFile && 
-        <Card sx={{ width: '600px', borderRadius: 2, boxShadow: 3 }}>
-          <CardMedia component="video" controls src={videoFile} />
+      {videoFile && (
+        <Card sx={{ width: "100%", borderRadius: 2, boxShadow: 3 }}>
+            <CardMedia component="video" controls src={videoFile} />
         </Card>
-      }
+      )}
     </>
   );
 }
