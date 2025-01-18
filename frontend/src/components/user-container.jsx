@@ -6,7 +6,7 @@ import UploadContainer from "./input/uploadcontainer";
 
 export default function UserContainer() {
     return (    
-        <Container fixed={true} sx={{ bgcolor: "lightyellow", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", height: "100vh" }}>
+        <Container fixed={true} sx={{ bgcolor: "lightyellow", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", height: "85vh" }}>
             <UploadContainer />
             <Divider />
             <Result />
