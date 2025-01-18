@@ -19,7 +19,7 @@ const VisuallyHiddenInput = styled("input")({
 export default function UploadContainer() {
 
     return (
-      <Container fixed={true} sx={{ bgcolor: "lightyellow", height: "100vh" }}>
+      <Container>
         <Button
           component="label"
           role={undefined}
