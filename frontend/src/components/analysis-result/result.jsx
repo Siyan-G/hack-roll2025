@@ -77,7 +77,7 @@ export default function Result() {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Video Summary
+              Summary
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               {placeholder}

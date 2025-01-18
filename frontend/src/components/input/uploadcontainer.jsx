@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
-import { ButtonGroup, Container, Divider } from '@mui/material';
+import { ButtonGroup, Container, Divider, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/system';
-import VideoContainer from './video-container';
 import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Card, CardMedia } from "@mui/material";
@@ -52,8 +51,14 @@ export default function UploadContainer({ onApiReturn }) {
           flexDirection: "column",
           width: "50%",
           padding: 1,
+          alignItems: "center",
         }}
       >
+
+        {!ready && <Typography variant="h6" mt= "10px" mb="5px">
+            Upload your video file here!
+        </Typography>}
+
         {ready && <Card sx={{ borderRadius: 2, boxShadow: 3, alignContent: "center", justifyContent: "center", marginBottom: "8px" }}>
           <CardMedia component="video" controls src={videoFile} ref={videoRef}/>
         </Card>}
