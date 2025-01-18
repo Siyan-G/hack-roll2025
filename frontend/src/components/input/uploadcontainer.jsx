@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ButtonGroup, Container, Divider } from '@mui/material';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -7,6 +7,7 @@ import VideoContainer from './video-container';
 import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Card, CardMedia } from "@mui/material";
+import { VideoContext } from '../../contexts/VideoContext';
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -24,6 +25,7 @@ const VisuallyHiddenInput = styled("input")({
 
 export default function UploadContainer({ onApiReturn }) {
 
+  const { videoRef } = useContext(VideoContext);
   const [videoFile, setVideoFile] = React.useState(null);
   const [ready, setReady] = React.useState(false);
 
@@ -53,7 +55,7 @@ export default function UploadContainer({ onApiReturn }) {
         }}
       >
         {ready && <Card sx={{ borderRadius: 2, boxShadow: 3, alignContent: "center", justifyContent: "center", marginBottom: "8px" }}>
-          <CardMedia component="video" controls src={videoFile} />
+          <CardMedia component="video" controls src={videoFile} ref={videoRef}/>
         </Card>}
         <ButtonGroup
           variant="contained"

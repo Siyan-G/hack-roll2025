@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AppBar, Container, Divider, Toolbar, Typography } from "@mui/material";
 import Result from "./analysis-result/result";
 import UploadContainer from "./input/uploadcontainer";
+import { VideoProvider } from "../contexts/VideoContext";
 
 export default function UserContainer() {
       const [apiReturned, setApiReturned] = useState(false);
@@ -11,11 +12,11 @@ export default function UserContainer() {
       };
 
       return (    
-        <>
+        <VideoProvider>
             <AppBar position="static">
                 <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                    Video Analysis Tool
+                    bRuDdErS
                 </Typography>
                 </Toolbar>
             </AppBar>
@@ -24,6 +25,6 @@ export default function UserContainer() {
                 <Divider />
                 {apiReturned && <Result />}
             </Container>
-        </>
+        </VideoProvider>
     );
 }

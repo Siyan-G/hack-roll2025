@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Accordion,
   Box,
@@ -10,6 +10,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import { VideoContext } from "../../contexts/VideoContext";
 
 const style = {
   position: 'absolute',
@@ -30,13 +31,22 @@ export default function Result() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const { seekToTimestamp } = useContext(VideoContext);
+    const handleSetTimestamp = (x) => {
+      seekToTimestamp(x); // Seek to 10 seconds
+    };
+    const getStamp = (x) => {
+      const min = Math.floor(x / 60).toString().padStart(2, '0');
+      const sec = (x % 60).toString().padStart(2, '0');
+      return "" + min + ":" + sec;
+    }
+
     return (
       <Box sx={{
         width: '100%',
         maxWidth: 600,
         margin: '0 auto',
         p: 2,
-        overflow: "auto",
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column',
@@ -44,6 +54,9 @@ export default function Result() {
       }}>
         
         {/* Summary Section */}
+        <Typography variant="h6" mb="10px">
+            Summary
+        </Typography>
         <Button
           variant="contained"
           aria-label="outlined primary button group"
@@ -72,9 +85,18 @@ export default function Result() {
         </Modal>
 
         {/* Timestamps List */}
-        <Box>
-          <Typography variant="h6">
-            Timestamps
+        <Box sx={{
+          width: '100%',
+          maxWidth: 600,
+          margin: '0 auto',
+          p: 2,
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}>
+          <Typography variant="h6" mb="10px">
+            Notable Timestamps
           </Typography>
           <div>
             <Accordion>
@@ -83,13 +105,15 @@ export default function Result() {
                 aria-controls="panel1-content"
                 id="panel1-header"
               >
-                <Typography component="span">Accordion 1</Typography>
+                <Typography component="span">{getStamp(15)}</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                  malesuada lacus ex, sit amet blandit leo lobortis eget.
-                </Typography>
+                <Button sx={{ textTransform: "none" }} onClick={() => handleSetTimestamp(15)}>
+                  <Typography>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                    malesuada lacus ex, sit amet blandit leo lobortis eget.
+                  </Typography>
+                </Button>
               </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -98,13 +122,15 @@ export default function Result() {
                 aria-controls="panel2-content"
                 id="panel2-header"
               >
-                <Typography component="span">Accordion 2</Typography>
+                <Typography component="span">{getStamp(30)}</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                  malesuada lacus ex, sit amet blandit leo lobortis eget.
-                </Typography>
+                <Button sx={{ textTransform: "none" }} onClick={() => handleSetTimestamp(30)}>
+                  <Typography>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                    malesuada lacus ex, sit amet blandit leo lobortis eget.
+                  </Typography>
+                </Button>
               </AccordionDetails>
             </Accordion>
           </div>
