@@ -82,7 +82,7 @@ def recognize_speech_from_audio_file(audio_file_path):
     speech_recognizer.start_continuous_recognition()
 
     # Wait for the audio file processing to complete
-    while done == 'False':
+    while not done:
         print("done: ", done)
         print("Waiting for recognition to complete...")
         time.sleep(0.1)  # Adding a slight delay to avoid high CPU usage
