@@ -36,9 +36,10 @@ export default function Result() {
       seekToTimestamp(x); // Seek to 10 seconds
     };
     const getStamp = (x) => {
-      const min = Math.floor(x / 60).toString().padStart(2, '0');
+      const hr = Math.floor(Math.floor(x / 60) / 60);
+      const min = (Math.floor(x / 60) % 60).toString().padStart(2, '0');
       const sec = (x % 60).toString().padStart(2, '0');
-      return "" + min + ":" + sec;
+      return "" + hr + ":" + min + ":" + sec;
     }
 
     return (
@@ -122,10 +123,10 @@ export default function Result() {
                 aria-controls="panel2-content"
                 id="panel2-header"
               >
-                <Typography component="span">{getStamp(30)}</Typography>
+                <Typography component="span">{getStamp(5286)}</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Button sx={{ textTransform: "none" }} onClick={() => handleSetTimestamp(30)}>
+                <Button sx={{ textTransform: "none" }} onClick={() => handleSetTimestamp(5286)}>
                   <Typography>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
                     malesuada lacus ex, sit amet blandit leo lobortis eget.
