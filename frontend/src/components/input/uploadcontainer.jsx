@@ -22,7 +22,7 @@ const VisuallyHiddenInput = styled("input")({
 
 
 
-export default function UploadContainer({ onApiReturn }) {
+export default function UploadContainer() {
 
   const { videoRef } = useContext(VideoContext);
   const [audioFile, setAudioFile] = React.useState(null);

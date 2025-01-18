@@ -21,7 +21,7 @@ export default function UserContainer() {
                 </Toolbar>
             </AppBar>
             <Container maxWidth={false} sx={{ bgcolor: "lightyellow", display: "flex", flexDirection: "row", height: "100vh" , width: "full"}}>
-                <UploadContainer onApiReturn={handleApiReturn} />
+                <UploadContainer />
                 <Divider />
                 {apiReturned && <Result />}
             </Container>
