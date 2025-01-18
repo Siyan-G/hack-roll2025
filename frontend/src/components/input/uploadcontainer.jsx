@@ -5,6 +5,8 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/system';
 import VideoContainer from './video-container';
 import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Card, CardMedia } from "@mui/material";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -25,21 +27,39 @@ export default function UploadContainer() {
 
   const handleChange = (event) => {
     const files = event.target.files;
-    setVideoFile(files[0]);
+    setVideoFile(URL.createObjectURL(files[0]));
     setReady(true);
 
   }
 
+  const handleDelete = () => {
+    setVideoFile(null);
+    setReady(false);
+  }
+
     return (
-      <Container sx={{ display: "flex", flexDirection: "column", width: "50%", gap: 2 }}>
-        <VideoContainer inputVideoFile={videoFile} />
-        <ButtonGroup variant="outlined" aria-label="outlined primary button group">
+      <Container
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          width: "50%",
+          padding: 1,
+        }}
+      >
+        {ready && <Card sx={{ borderRadius: 2, boxShadow: 3, alignContent: "center", justifyContent: "center", marginBottom: "8px" }}>
+          <CardMedia component="video" controls src={videoFile} />
+        </Card>}
+        <ButtonGroup
+          variant="contained"
+          aria-label="outlined primary button group"
+          sx={{ alignContent: "center", justifyContent: "center", marginTop: "35px" }}
+        >
           <Button
             component="label"
             role={undefined}
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
-            sx={{ width: "140px" }}
+            sx={{ width: "150px", height: "50px" }}
           >
             Select File
             <VisuallyHiddenInput type="file" onChange={handleChange} multiple />
@@ -48,15 +68,25 @@ export default function UploadContainer() {
             component="label"
             role={undefined}
             tabIndex={-1}
+            startIcon={<DeleteIcon />}
+            sx={{ width: "150px" }}
+            disabled={!ready}
+            onClick={handleDelete}
+          >
+            Remove File
+          </Button>
+          <Button
+            component="label"
+            role={undefined}
+            tabIndex={-1}
             startIcon={<TroubleshootIcon />}
-            sx={{ width: "140px" }}
+            sx={{ width: "150px" }}
             disabled={!ready}
             onClick={() => console.log("Summarising")}
           >
             Summarise
           </Button>
         </ButtonGroup>
-
         <Divider></Divider>
       </Container>
     );
