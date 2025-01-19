@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { AppBar, Container, Divider, Stack, Toolbar, Typography, Box, CircularProgress, CardMedia } from "@mui/material";
+import { AppBar, Container, Stack, Toolbar, Typography, Box, CircularProgress } from "@mui/material";
 import Result from "./analysis-result/result";
 import UploadContainer from "./input/uploadcontainer";
 import { VideoProvider } from "../contexts/VideoContext";
-import chaos from "../assets/chaos.mp4"
+import AutoPlayVideo from "./chaos/chaoticvideo";
 
 export default function UserContainer() {
       const [apiReturned, setApiReturned] = useState(false);
@@ -37,14 +37,7 @@ export default function UserContainer() {
               width: "full",
             }}
           >
-            <CardMedia
-              component={"video"}
-              src={chaos}
-              autoPlay
-              loop
-              muted
-              style={{ height: "150px", width: "150px" }}
-            />
+            <AutoPlayVideo />
             <Stack>
               <UploadContainer
                 handleApiReturn={handleApiReturn}
