@@ -87,7 +87,7 @@ def recognize_speech_from_audio_file(audio_file_path):
     speech_recognizer.stop_continuous_recognition()
 
     print("Transcription completed:", transcriptions)
-    print("Word-level timestamps:", word_timestamps)
+    # print("Word-level timestamps:", word_timestamps)
     joined = " ".join(transcriptions)
     summary = summarize_text(joined)
     print(summary)
