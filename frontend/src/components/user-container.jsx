@@ -3,7 +3,7 @@ import { AppBar, Container, Stack, Toolbar, Typography, Box, CircularProgress } 
 import Result from "./analysis-result/result";
 import UploadContainer from "./input/uploadcontainer";
 import { VideoProvider } from "../contexts/VideoContext";
-import AutoPlayVideo from "./chaos/chaoticvideo";
+import Chaos from "./chaos/chaos.jsx";
 
 export default function UserContainer() {
       const [apiReturned, setApiReturned] = useState(false);
@@ -37,7 +37,7 @@ export default function UserContainer() {
               width: "full",
             }}
           >
-            <AutoPlayVideo />
+            <Chaos />
             <Stack>
               <UploadContainer
                 handleApiReturn={handleApiReturn}
