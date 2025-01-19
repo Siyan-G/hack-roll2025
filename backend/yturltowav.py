@@ -1,5 +1,5 @@
 import yt_dlp
-import ffmpeg
+import subprocess
 import os
 
 def youtube_to_wav(url):
@@ -14,20 +14,34 @@ def youtube_to_wav(url):
         }],
     }
     
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
-        try:
-            source_file = "wav/temp_audio.mp4"
-            # Convert mp4 to wav
-            stream = ffmpeg.input("wav/temp_audio.mp4")
-            stream = ffmpeg.output(stream, "wav/output.wav")
-            
-        except Exception as e:
-            print(f"An error occurred: {e}")
-        finally:
-            if os.path.exists("wav/temp_audio.mp4"):
-                os.remove("wav/temp_audio.mp4")
-            
+    try: 
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([url])
+        
+        split_wav_file("wav/temp_audio.wav")
+    
+    except Exception as e:
+        print(f"An error has occurred: {e}")
+    finally: 
+        if os.path.exists("wav/temp_audio.wav"):
+            os.remove("wav/temp_audio.wav")
+            print("Temporary File 'wav/temp_audio.wav' has been removed.")
+        
+def split_wav_file(file_path):
+    chunk_length = 5 * 60  # 5 minutes in seconds
+
+    # Use ffmpeg to split the audio
+    command = [
+        "ffmpeg",
+        "-i", file_path,
+        "-filter:a", f"atempo={1.5}",  # Adjust audio tempo
+        "-f", "segment",
+        "-segment_time", str(chunk_length),
+        "-c:a", "pcm_s16le",  # Re-encode audio to WAV format
+        os.path.join("wav", "chunk_%02d.wav")
+    ]
+    subprocess.run(command, check=True)
+    
 # Test Code    
 url = "https://www.youtube.com/watch?v=2X5XBr19-G0"
 youtube_to_wav(url)
